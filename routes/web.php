@@ -17,18 +17,18 @@ $app->get('/', function () use ($app) {
 
 $app->group(['prefix' => 'user'], function () use ($app) {
     $app->get('/', 'UserController@index');
-    $app->post('/add', 'UserController@create');
+    $app->post('/', 'UserController@create');
     $app->get('/{id}', 'UserController@show');
 });
 
 $app->group(['prefix' => 'changeLog'], function () use ($app) {
     $app->get('/', 'ChangeLogController@index');
-    $app->get('/findByParking/{id}', 'ChangeLogController@findByParking');
-    $app->get('/findByChanger/{id}', 'ChangeLogController@findByChanger');
+    $app->get('/ByParking/{id}', 'ChangeLogController@findByParking');
+    $app->get('/ByChanger/{id}', 'ChangeLogController@findByChanger');
 });
 
 $app->group(['prefix' => 'parkingLot'], function () use ($app) {
     $app->get('/', 'ParkingLotController@index');
-    $app->post('/add', 'ParkingLotController@create');
+    $app->post('/', 'ParkingLotController@create');
     $app->get('/{id}', 'ParkingLotController@show');
 });
