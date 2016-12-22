@@ -8,6 +8,6 @@ class ParkingLot extends Model
 {
     protected $table = 'parking_lot';
 
-    protected $fillable = array('id', 'logitude', 'latitude', 'quantity', 'creator_id', 'change_log_id');
+    protected $fillable = array('id', 'longitude', 'latitude', 'creator_id');
 
 }

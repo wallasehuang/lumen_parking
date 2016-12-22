@@ -26,9 +26,7 @@ class BaseTable extends Migration
             $table->increments('id');
             $table->string('longitude');
             $table->string('latitude');
-            $table->integer('quantity');
             $table->string('creator_id');
-            $table->string('change_log_id');
             $table->timestamps();
         });
 
