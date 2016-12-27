@@ -25,7 +25,7 @@ class ParkingLotController extends Controller
         $parking_lot = ParkingLot::all();
         $reqult      = array();
         foreach ($parking_lot as $item) {
-            $result = [
+            $result[] = [
                 'id'         => $item->id,
                 'longitude'  => $item->longitude,
                 'latitude'   => $item->latitude,
