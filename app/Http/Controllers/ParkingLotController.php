@@ -28,8 +28,8 @@ class ParkingLotController extends Controller
             'longitude'  => $parking_lot->longitude,
             'latitude'   => $parking_lot->latitude,
             'creator_id' => $parking_lot->user->account,
-            'quantity'   => $parking_lot->info->last()->quantity,
-            'changer_id' => $parking_lot->info->last()->user->account,
+            // 'quantity'   => $parking_lot->info->last()->quantity,
+            // 'changer_id' => $parking_lot->info->last()->user->account,
         ];
         return response()->json($result);
     }
