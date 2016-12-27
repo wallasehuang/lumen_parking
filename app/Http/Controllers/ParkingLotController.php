@@ -23,14 +23,18 @@ class ParkingLotController extends Controller
     public function index()
     {
         $parking_lot = ParkingLot::all();
-        $result      = [
-            'id'        => $parking_lot->id,
-            'longitude' => $parking_lot->longitude,
-            'latitude'  => $parking_lot->latitude,
-            // 'creator_id' => $parking_lot->user->account,
-            // 'quantity'   => $parking_lot->info->last()->quantity,
-            // 'changer_id' => $parking_lot->info->last()->user->account,
-        ];
+        $reqult      = array();
+        foreach ($parking_lot as $item) {
+            $result = [
+                'id'         => $item->id,
+                'longitude'  => $item->longitude,
+                'latitude'   => $item->latitude,
+                'creator_id' => $item->user->account,
+                'quantity'   => $item->info->last()->quantity,
+                'changer_id' => $item->info->last()->user->account,
+            ];
+        }
+
         return response()->json($result);
     }
 
