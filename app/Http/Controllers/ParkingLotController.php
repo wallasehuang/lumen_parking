@@ -6,6 +6,7 @@ use App\ChangeLog;
 use App\ParkingLot;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Validator;
 
 class ParkingLotController extends Controller
@@ -24,6 +25,9 @@ class ParkingLotController extends Controller
     {
         $parking_lot = ParkingLot::all();
         $reqult      = array();
+        $reqults     = [
+            'count' => $parking_lot->count(),
+        ];
         foreach ($parking_lot as $item) {
             $result[] = [
                 'id'         => $item->id,
@@ -34,8 +38,12 @@ class ParkingLotController extends Controller
                 'changer_id' => $item->info->last()->user->account,
             ];
         }
+        $reqults['result'] = $result;
 
-        return response()->json($result);
+        return response()->json($reqults);
+        // return Response::make(json_encode($result), 200)->header('Content-Type', 'application/json');
+        // return response(json_encode($result), 200)
+        //     ->header('Content-Type', 'application/json');
     }
 
     public function create(Request $request)
