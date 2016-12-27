@@ -35,6 +35,7 @@ class ParkingLotController extends Controller
                 'latitude'   => $item->latitude,
                 'creator_id' => $item->user->account,
                 'quantity'   => $item->info->last()->quantity,
+                'status'     => $item->info->last()->status,
                 'changer_id' => $item->info->last()->user->account,
             ];
         }
