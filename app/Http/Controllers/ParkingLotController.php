@@ -113,4 +113,65 @@ class ParkingLotController extends Controller
 
         return response()->json($result);
     }
+
+    public function change(Request $request)
+    {
+        $data = $request->all();
+
+        $rule = [
+            'parking_lot_id' => 'required',
+            'changer_id'     => 'required',
+            'status'         => 'required|min:0|max:3',
+            'quantity'       => 'required|min:0numeric',
+        ];
+
+        $validator = Validator::make($data, $rule);
+        if ($validator->fails()) {
+            return $validator->errors();
+        }
+        $user = User::find($data['changer_id']);
+        if (is_null($user)) {
+            return response()->json([
+                'error' => 'error of changer_id : ' . $data['changer_id'],
+            ]);
+        }
+        $parking_lot = ParkingLot::find($data['parking_lot_id']);
+        if (is_null($parking_lot)) {
+            return response()->json([
+                'error' => 'error of parking_lot_id : ' . $data['parking_lot_id'],
+            ]);
+        }
+        $change_log = ChangeLog::create([
+            'parking_lot_id' => $data['parking_lot_id'],
+            'changer_id'     => $data['changer_id'],
+            'status'         => $data['status'],
+            'quantity'       => $data['quantity'],
+        ]);
+
+        $result = [
+            'id'         => $parking_lot->id,
+            'longitude'  => $parking_lot->longitude,
+            'latitude'   => $parking_lot->latitude,
+            'creator_id' => $parking_lot->creator_id,
+            'info'       => $change_log,
+        ];
+
+        return response()->json($result);
+    }
+
+    public function delete(Request $request)
+    {
+        $data        = $request->all();
+        $parking_lot = ParkingLot::find($data['id']);
+        if (is_null($parking_lot)) {
+            return response()->json([
+                'error' => 'Not find parking_lot',
+            ]);
+        }
+        $parking_lot->delete();
+
+        return response()->json([
+            'success' => 'Success delete',
+        ]);
+    }
 }

@@ -31,4 +31,6 @@ $app->group(['prefix' => 'parkingLot'], function () use ($app) {
     $app->get('/', 'ParkingLotController@index');
     $app->post('/', 'ParkingLotController@create');
     $app->get('/{id}', 'ParkingLotController@show');
+    $app->post('/update', 'ParkingLotController@change');
+    $app->post('/delete', 'ParkingLotController@delete');
 });
