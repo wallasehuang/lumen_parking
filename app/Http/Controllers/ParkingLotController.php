@@ -37,6 +37,7 @@ class ParkingLotController extends Controller
                 'quantity'   => $item->info->last()->quantity,
                 'status'     => $item->info->last()->status,
                 'changer_id' => $item->info->last()->user->account,
+                'updated_at' => date($item->info->last()->created_at),
             ];
         }
         $reqults['result'] = $result;
